@@ -19,6 +19,6 @@ class ZmqClient:
 
 
 zmq_c = ZmqClient('10001')
-for i in range(0, 10000):
+for i in range(0, 100):
 	msg = zmq_c.recv("sender")
 	print msg

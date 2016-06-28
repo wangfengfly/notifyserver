@@ -3,6 +3,7 @@
 
 import threading
 import time
+from ZmqFactory.ServerFactory import ServerFactory
 
 class BeatHeart(threading.Thread):
 	def __init__(self, seconds, logger):
@@ -13,6 +14,6 @@ class BeatHeart(threading.Thread):
 		
 	def run(self):
 		while True:
-			#发送心跳包到zmq
-			self.logger.info("after sleeping (%d)", self.seconds)
+			#self.logger.info("after sleeping (%d)", self.seconds)
+			ServerFactory.getServer("push").send("after sleeping " + str(self.seconds))
 			time.sleep(self.seconds)

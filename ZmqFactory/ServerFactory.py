@@ -8,7 +8,3 @@ class ServerFactory:
 			return PushServer()
 		else:
 			return None
-
-s = ServerFactory.getServer("push")
-for i in range(0, 10000):
-	s.send("sending " + str(i))

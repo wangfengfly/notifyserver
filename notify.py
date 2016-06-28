@@ -9,7 +9,8 @@ import time
 import sys
 from beatheart import BeatHeart
 import ConfigParser
-	
+from ZmqFactory.ServerFactory import ServerFactory
+
 LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 logger = logging.getLogger(__name__)
 dict = {}
@@ -54,7 +55,8 @@ def main():
 			if postfix_filter(fn):
 				logger.info("WD=(%d) MASK=(%d) COOKIE=(%d) LEN=(%d) MASK->NAMES=%s "
 					"WATCH-PATH=[%s] FILENAME=[%s]", 
-					hd.wd, hd.mask, hd.cookie, hd.len, tn, wp, fn)
+					hd.wd, hd.mask, hd.cookie, hd.len, tn, wp, fn)			
+				ServerFactory.getServer("push").send(fn + "\t" + ''.join(tn))
 
 		
 if __name__ == '__main__':

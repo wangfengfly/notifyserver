@@ -1,3 +1,3 @@
-class Server:
+class Server(object):
     def send(self, msg):
 		pass
