@@ -14,6 +14,6 @@ class BeatHeart(threading.Thread):
 		
 	def run(self):
 		while True:
-			#self.logger.info("after sleeping (%d)", self.seconds)
-			ServerFactory.getServer("push").send("after sleeping " + str(self.seconds))
+			msg = "<L><DataFinder><L><" + str(time.time()) + ">"
+			ServerFactory.getServer("push").send(msg)
 			time.sleep(self.seconds)
