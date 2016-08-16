@@ -18,15 +18,12 @@
 namespace hxmt {
 namespace msg {
 
-const int  MSGTYPE = (int)'S';
-extern "C"
-{
 typedef void (RecieveFunc)(const char* missionID,const char* msg);
+
 void SENDEXPORT SetConnect(const char* ip,const char* port);
 void SENDEXPORT SetRecieve(int port,RecieveFunc* callback);
 int SENDEXPORT MsgSend(const char* missionID,const char* msg);
 void SENDEXPORT Release();
-}
 }//End namespace msg
 }//End namespace dpgs
 

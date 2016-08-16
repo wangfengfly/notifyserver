@@ -8,17 +8,9 @@ import thread
 import time
 import sys
 import os
-import ctypes as ct
 from beatheart import BeatHeart
 import ConfigParser
-#from ZmqFactory.ServerFactory import ServerFactory
-
-
-ll = ct.cdll.LoadLibrary 
-lib = ll("/home/soft/msgsend_lib/libmsgsend.so")   
-lib.SetConnect("192.168.60.27", "6677")
-lib.MsgSend("aaaaaaa", "<B><dfafafdaf><D><afafafa>")
-
+from ZmqFactory.ServerFactory import ServerFactory
 
 LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 logger = logging.getLogger(__name__)
@@ -67,7 +59,7 @@ def postfix_filter(fn):
   检查事件类型
 '''
 def tn_checker(tn):
-	tn_list = ['IN_CLOSE_WRITE', 'IN_DELETE']
+	tn_list = ['IN_MODIFY', 'IN_DELETE']
 	if ''.join(tn) in tn_list:
 		return True
 	return False
@@ -85,9 +77,7 @@ def main():
 				extension = extension.lstrip('.')
 				msg = "<B><" + wp + "/" + fn + ">" + "<B><" + extension + ">"
 				logger.info(msg)
-#                                lib.MsgSend("DataFinder", "<B><Find New File><C><>")
-                                lib.MsgSend("DataFinder", msg)
-#				ServerFactory.getServer("push").send(msg)
+				ServerFactory.getServer("push").send(msg)
 
 		
 if __name__ == '__main__':
